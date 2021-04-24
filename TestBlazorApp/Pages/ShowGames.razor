@@ -1,0 +1,50 @@
+﻿@page "/showgames"
+
+@using TestBlazorApp.Data
+@inject SoccerGameService GameService
+
+<h1>Soccer Games</h1>
+
+@if (soccerGames == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Status</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th>Score</th>
+                <th>Home Team</th>
+                <th>Away Team</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var game in soccerGames)
+            {
+                <tr>
+                    <td>@game.GameId</td>
+                    <td>@game.Status</td>
+                    <td>@game.GameTime.ToString()</td>
+                    <td>@game.GameVenue.FullFieldName</td>
+                    <td>@game.HomeScore - @game.AwayScore</td>
+                    <td>@game.HomeTeam</td>
+                    <td>@game.AwayTeam</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<SoccerGame> soccerGames;
+
+    protected override async Task OnInitializedAsync()
+    {
+        soccerGames = await GameService.GetSoccerGamesAsync(DateTime.Now);
+    }
+}

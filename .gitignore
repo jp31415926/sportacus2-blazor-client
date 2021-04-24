@@ -3,3 +3,5 @@
 ################################################################################
 
 /.vs
+/TestBlazorApp/obj
+/TestBlazorApp/bin/Debug/netcoreapp3.1
