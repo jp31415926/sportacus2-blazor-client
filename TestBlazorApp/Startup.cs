@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TestBlazorApp.Data;
+using TestBlazorApp.Auth;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace TestBlazorApp
 {
@@ -30,6 +32,7 @@ namespace TestBlazorApp
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<SoccerGameService>();
+            services.AddScoped<AuthenticationStateProvider, SportacusAuthenticationStateProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,8 +51,10 @@ namespace TestBlazorApp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             app.UseRouting();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

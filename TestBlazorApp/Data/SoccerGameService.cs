@@ -35,5 +35,18 @@ namespace TestBlazorApp.Data
             Games.Add(newGame);
             return Task.FromResult(Games);
         }
+
+        public Task<List<SoccerGame>> GetSubscribedGamesAsync()
+        {
+            DataGenerator dg = new DataGenerator();
+
+            List<SoccerGame> games = new List<SoccerGame>();
+            for (int i = 0; i < 3; i++)
+            {
+                games.Add(dg.createSoccerGame());
+            }
+
+            return Task.FromResult(games);
+        }
     }
 }

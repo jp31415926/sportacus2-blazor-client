@@ -1,0 +1,27 @@
+﻿@using TestBlazorApp.Data;
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">@game.GameId</h5>
+        <div>
+            <p class="card-text">@game.HomeTeam</p>
+            <p class="card-text">@game.AwayTeam</p>
+        </div>
+        <div>
+            @if (game.Status == "complete")
+            {
+                <p class="card-text">@game.HomeScore</p>
+                <p class="card-text">@game.AwayScore</p>
+            }
+            else
+            {
+                <p class="card-text">@game.GameTime.ToLongDateString()</p>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public SoccerGame game { get; set; }
+}

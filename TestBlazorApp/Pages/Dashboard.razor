@@ -1,0 +1,31 @@
+﻿@page "/dashboard"
+@using TestBlazorApp.Data
+@inject SoccerGameService GameService
+
+<h3>Dashboard</h3>
+
+<div>
+    <h4>Subscribed Games</h4>
+
+    @if (soccerGames == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        @foreach (var game in soccerGames)
+        {
+            <TestBlazorApp.Components.CompactGame game="@game"></TestBlazorApp.Components.CompactGame>
+        }
+    }
+</div>
+
+@code {
+    private List<SoccerGame> soccerGames;
+
+    protected override async Task OnInitializedAsync()
+    {
+        soccerGames = await GameService.GetSubscribedGamesAsync();
+    }
+
+}

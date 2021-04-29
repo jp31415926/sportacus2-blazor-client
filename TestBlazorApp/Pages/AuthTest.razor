@@ -1,0 +1,36 @@
+﻿@page "/AuthTest"
+@using TestBlazorApp.Auth
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<h1>Sportacus Super-Secret Authorization</h1>
+
+
+<AuthorizeView>
+    <Authorized>
+        <h1>Hello, @context.User.Identity.Name!</h1>
+        <p>You can only see this content if you're authenticated.</p>
+    </Authorized>
+    <NotAuthorized>
+            <h1>Authentication Failure!</h1>
+            <p>You're not signed in.</p>
+    </NotAuthorized>
+    <Authorizing>
+        <h1>Authorizing</h1>
+    </Authorizing>
+</AuthorizeView>
+
+
+@code {
+    //[CascadingParameter] Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    //AuthenticationState AuthState;
+
+    //protected override async Task OnInitializedAsync()
+    //{
+
+    //    var myStateProv = AuthenticationStateProvider as
+    //                 SportacusAuthenticationStateProvider;
+    //    myStateProv.LoadUser("pmccoy", "testtest");
+    //}
+
+}
